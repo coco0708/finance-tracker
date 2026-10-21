@@ -1,0 +1,28 @@
+plugins { id "com.android.application" }
+android {
+    namespace "com.financetracker.app"
+    compileSdk 35
+    defaultConfig {
+        applicationId "com.financetracker.app"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+    }
+    signingConfigs {
+        // Fixed key kept in the project so every new build installs over the old one without losing your data.
+        tracker {
+            storeFile file("finance-tracker.jks")
+            storePassword "financetracker"
+            keyAlias "financetracker"
+            keyPassword "financetracker"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.tracker
+        }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
